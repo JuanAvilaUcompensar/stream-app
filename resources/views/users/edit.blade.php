@@ -6,7 +6,7 @@
             <div class="row mb-2">
                 <div class="col-sm-12">
                     <h1>
-                        Edit Qrcode
+                        Edit User
                     </h1>
                 </div>
             </div>
@@ -19,17 +19,17 @@
 
         <div class="card">
 
-            {!! Form::model($qrcode, ['route' => ['qrcodes.update', $qrcode->id], 'method' => 'patch','enctype' => 'multipart/form-data']) !!}
+            {!! Form::model($user, ['route' => ['users.update', $user->id], 'method' => 'patch']) !!}
 
             <div class="card-body">
                 <div class="row">
-                    @include('qrcodes.fields')
+                    @include('users.fields')
                 </div>
             </div>
 
             <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('qrcodes.index') }}" class="btn btn-default"> Cancel </a>
+                <a href="{{ route('users.index') }}" class="btn btn-default"> Cancel </a>
             </div>
 
             {!! Form::close() !!}

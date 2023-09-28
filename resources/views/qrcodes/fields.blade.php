@@ -1,6 +1,5 @@
 <!-- User Id Field -->
 {!! Form::hidden('user_id', Auth::user()->id, ['class' => 'form-control', 'required']) !!}
-</div>
 
 <!-- Website Field -->
 <div class="form-group col-sm-6">
