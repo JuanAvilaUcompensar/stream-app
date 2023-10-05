@@ -105,5 +105,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
     {
         return $this->belongsTo(User::class);
     }
+    public function qrcodes(): HasMany
+    {
+        return $this->hasMany(Qrcode::class);
+    }
 
 }

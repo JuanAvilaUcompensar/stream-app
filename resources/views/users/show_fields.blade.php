@@ -31,18 +31,25 @@
 <h1>Transacciones</h1>
 
 <div class="col-sm-12">
-    <table>
+    <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Transactions Id</th>
-                <th>Amount</th>
+                <th scope="col">Transactions Id</th>
+                <th scope="col">Producto</th>
+                <th scope="col">Amount</th>
+                <th scope="col">payment_method</th>
+                <th scope="col">Status</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="table-group-divider">
+            
             @foreach ($user->transactions as $transaction)
                 <tr>
                     <td>{{ $transaction->id }}</td>
+                    <td>{{ $transaction->qrcode['product_url'] }}</td>
                     <td>${{ $transaction->amount }}</td>
+                    <td></td>
+                    <td></td>
                 </tr>
             @endforeach
         </tbody>

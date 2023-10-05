@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
- use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @OA\Schema(
  *      schema="Qrcode",
@@ -131,6 +132,9 @@ use Illuminate\Database\Eloquent\Model;
         'deleted_at' => 'nullable',
         'product_url_image_path' => 'nullable||mimes:jpeg,jpg,png,bmp,gif,svg||max:2048'
     ];
-
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
     
 }

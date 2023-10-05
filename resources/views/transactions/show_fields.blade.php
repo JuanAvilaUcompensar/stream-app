@@ -1,7 +1,6 @@
 <!-- User Id Field -->
 <div class="col-sm-12">
     {!! Form::label('user_id', 'User Id:') !!}
-
     <p>{{ $transaction->user['name'] }} || {{$transaction->user['email']}}</p>
 </div>
 

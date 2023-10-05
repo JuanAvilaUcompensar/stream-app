@@ -1,7 +1,7 @@
 <!-- User Id Field -->
 <div class="col-sm-12">
     {!! Form::label('user_id', 'User Id:') !!}
-    <p>{{ $qrcode->user_id }}</p>
+    <p>{{ $qrcode->user['name'] }} || {{$qrcode->user['email'] }}</p>
 </div>
 
 <!-- Website Field -->

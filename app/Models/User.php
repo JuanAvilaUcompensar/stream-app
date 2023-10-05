@@ -138,4 +138,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
     {
         return $this->hasMany(Transaction::class);
     }
+
+    public function qrcodes(): HasMany
+    {
+        return $this->hasMany(Qrcode::class);
+    }
 }
