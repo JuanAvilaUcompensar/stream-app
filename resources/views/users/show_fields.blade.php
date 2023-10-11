@@ -1,3 +1,11 @@
+<!-- Roles Id Field -->
+<div class="col-sm-12">
+    {!! Form::label('roles_id', 'Roles Id:') !!}
+    <p>
+        <a href="{{ route('roles.show', $user->roles['id']) }}" class="btn btn-outline-info"> {{$user->roles['name']}} </a>
+    </p>
+</div>
+
 <!-- Name Field -->
 <div class="col-sm-12">
     {!! Form::label('name', 'Name:') !!}
@@ -18,41 +26,30 @@
 
 <!-- Password Field -->
 <div class="col-sm-12">
-    {!! Form::label('password', 'Password:') !!}
-    <p>{{ $user->password }}</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>sdf</th>
+                <th>sdf</th>
+                <th>sdf</th>
+                <th>sdf</th>
+            </tr>
+        </thead>
+        
+       <tbody>
+            <tr>
+                @foreach($user->transactions as $transaction)
+                    <th>{{ $transaction->amount}}</th> 
+                @endforeach        
+            </tr>
+       </tbody>
+    </table>
 </div>
 
 <!-- Remember Token Field -->
 <div class="col-sm-12">
     {!! Form::label('remember_token', 'Remember Token:') !!}
     <p>{{ $user->remember_token }}</p>
-</div>
-
-<h1>Transacciones</h1>
-
-<div class="col-sm-12">
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th scope="col">Transactions Id</th>
-                <th scope="col">Producto</th>
-                <th scope="col">Amount</th>
-                <th scope="col">payment_method</th>
-                <th scope="col">Status</th>
-            </tr>
-        </thead>
-        <tbody class="table-group-divider">
-            
-            @foreach ($user->transactions as $transaction)
-                <tr>
-                    <td>{{ $transaction->id }}</td>
-                    <td>{{ $transaction->qrcode['product_url'] }}</td>
-                    <td>${{ $transaction->amount }}</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
 </div>
 

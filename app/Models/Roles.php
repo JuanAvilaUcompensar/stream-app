@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
- use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @OA\Schema(
  *      schema="Roles",
@@ -58,6 +59,11 @@ use Illuminate\Database\Eloquent\Model;
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'
     ];
+
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class);
+    }
 
     
 }

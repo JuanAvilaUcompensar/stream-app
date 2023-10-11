@@ -3,7 +3,7 @@
         <table class="table" id="users-table">
             <thead>
             <tr>
-                <th>id</th>
+                <th>Roles Id</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Email Verified At</th>
@@ -15,7 +15,7 @@
             <tbody>
             @foreach($users as $user)
                 <tr>
-                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->roles_id }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->email_verified_at }}</td>

@@ -18,9 +18,7 @@
             <tbody>
             @foreach($qrcodes as $qrcode)
                 <tr>
-                    <td>
-                        <a href="/users/{{$qrcode->user['id']}}" > {{ $qrcode->user['name'] }} || {{ $qrcode->user['email'] }}</a>
-                    </td> 
+                    <td>{{ $qrcode->user_id }}</td> 
                     <td>{{ $qrcode->website }}</td>
                     <td>{{ $qrcode->company_name }}</td>
                     <td>{{ $qrcode->product_name }}</td>
