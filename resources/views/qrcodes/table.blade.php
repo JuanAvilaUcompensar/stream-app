@@ -3,30 +3,30 @@
         <table class="table" id="qrcodes-table">
             <thead>
             <tr>
-                <th>User Id</th>
+                <th>Propietario del Producto</th>
                 <th>Website</th>
                 <th>Company Name</th>
                 <th>Product Name</th>
                 <th>Product Url</th>
                 <th>Callback Url</th>
+                <th>Product url image path</th>
                 <th>Qrcode Path</th>
                 <th>Amount</th>
-                <th>Product Url Image Path</th>
                 <th colspan="3">Action</th>
             </tr>
             </thead>
             <tbody>
             @foreach($qrcodes as $qrcode)
                 <tr>
-                    <td>{{ $qrcode->user_id }}</td> 
-                    <td>{{ $qrcode->website }}</td>
+                    <td> <a href="/users/{{$qrcode->user['id']}}"><button type="button" class="btn btn-outline-primary">{{$qrcode->user['name']}}</button></a></td>
+                    <td> <a href="{{$qrcode->website}}"><button type="button" class="btn btn-outline-primary">{{$qrcode->website}}</button></a></td>
                     <td>{{ $qrcode->company_name }}</td>
                     <td>{{ $qrcode->product_name }}</td>
                     <td>{{ $qrcode->product_url }}</td>
-                    <td>{{ $qrcode->callback_url }}</td>
-                    <td><img width="30%" height="30%" src = "{{ $qrcode->qrcode_path }}"></td>
+                    <td> <a href="{{$qrcode->callback_url}}"><button type="button" class="btn btn-outline-primary">{{$qrcode->callback_url}}</button></a></td>
+                    <td><img width="100px" src = "{{ $qrcode->product_url_image_path }}"></td>
+                    <td><img width="100px" src = "{{ $qrcode->qrcode_path }}"></td>
                     <td>{{ $qrcode->amount }}</td>
-                    <td><img width="10%" height="10%" src = "{{ $qrcode->product_url_image_path }}"> </td>
                     <td  style="width: 120px">
                         {!! Form::open(['route' => ['qrcodes.destroy', $qrcode->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>

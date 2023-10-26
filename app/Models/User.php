@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 /**
  * @OA\Schema(
  *      schema="User",
- *      required={"roles_id","name","email","password"},
+ *      required={"name","email","password"},
  *      @OA\Property(
  *          property="name",
  *          description="",
@@ -120,6 +121,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
     {
         return $this->remember_token;
     }
+    public function getRolesId(){
+        return 'roles_id';
+    }
+    public function setRolesId($value){
+        $this->roles_id = $value;
+    }
     public function setRememberToken($value)
     {
         $this->remember_token = $value;
@@ -130,7 +137,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
     }
     public function setPasswordAttribute($value)
     {
-        $this->attributes['password'] = Hash::make($value);
+        if(Hash::needsRehash($value))
+
+        $password = Hash::make($value);
+
+        $this->attributes['password'] = $value;
     }
 
     /**
@@ -140,16 +151,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
     {
         return $this->hasMany(Transaction::class);
     }
-
-    public function roles(): BelongsTo
+    /**
+     * Get the roles for roles.
+     */
+    public function roles(): HasMany
     {
-        return $this->belongsTo(Roles::class);
+        return $this->hasMany(Roles::class);
+    }
+
+    public function role_name()
+    {
+        return $this->hasMany(Roles::class, 'id', 'roles_id')->select('name');
     }
 
     public function qrcodes(): HasMany
     {
         return $this->hasMany(Qrcode::class);
     }
-    
-    
 }

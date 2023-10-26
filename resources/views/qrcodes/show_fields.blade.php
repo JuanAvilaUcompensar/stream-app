@@ -1,15 +1,14 @@
 <!-- User Id Field -->
-<div class="col-sm-12">
-    {!! Form::label('user_id', 'Propietario de producto') !!}
-    <p>
-        <a href="../users/{{ $qrcode->user['id'] }}" class="btn btn-outline-info">{{ $qrcode->user['name'] }}</a>
-    </p>
+<div class="col-sm-12" style="margin-bottom: 1%;">
+    <H6><strong>PROPIETARIO DEL PRODUCTO</strong></H6>
+    <td> <a href="/users/{{ $qrcode->user['id'] }}"><button type="button"
+                class="btn btn-outline-primary">{{ $qrcode->user['name'] }}</button></a></td>
 </div>
 
 <!-- Website Field -->
 <div class="col-sm-12">
     {!! Form::label('website', 'Website:') !!}
-    <p><a href="{{ $qrcode->website }}" target="_blank">{{ $qrcode->website }}</a></p>
+    <p><a href="{{ $qrcode->website }}">{{ $qrcode->website }}</a></p>
 </div>
 
 <!-- Company Name Field -->
@@ -27,20 +26,23 @@
 <!-- Product Url Field -->
 <div class="col-sm-12">
     {!! Form::label('product_url', 'Product Url:') !!}
-    <p>{{ $qrcode->product_url }}</p>
+    <p><a href="{{ $qrcode->product_url }}">{{ $qrcode->product_url }}</a></p>
 </div>
 
+<div class="col-sm-12">
+    <h6><strong>Product_url_image_path:</strong></h6>
+    <img src="../{{ $qrcode->product_url_image_path }}" width="100px" />
+</div>
 <!-- Callback Url Field -->
 <div class="col-sm-12">
     {!! Form::label('callback_url', 'Callback Url:') !!}
-    <p>{{ $qrcode->callback_url }}</p>
+    <p><a href="{{ $qrcode->callback_url }}">{{ $qrcode->callback_url }}</a></p>
 </div>
 
 <!-- Qrcode Path Field -->
 <div class="col-sm-12">
     {!! Form::label('qrcode_path', 'Qrcode Path:') !!}
-    <p>{{ $qrcode->qrcode_path }}</p>    
-    <p> <img src="{{asset($qrcode->qrcode_path)}}" ></p>
+    <p> <img src="{{ asset($qrcode->qrcode_path) }}"></p>
 </div>
 
 <!-- Amount Field -->
@@ -49,53 +51,52 @@
     <p>{{ $qrcode->amount }}</p>
 </div>
 
-<!-- Product Url Image Path Field -->
 <div class="col-sm-12">
-    {!! Form::label('product_url_image_path', 'Product Url Image Path:') !!}
-    <p>{{ $qrcode->product_url_image_path }}</p>
-    <p> <img  width="150" height="150" src="{{asset($qrcode->product_url_image_path)}}" ></p>
+    <form action="{{ route('payment') }}" method="post"> 
+        @csrf <!-- protección contra ataques de falsificación de solicitudes entre sitios (CSRF).--> 
+        <input type="hidden" name="amount" value="{{ $qrcode->amount }}"> 
+        <input type="text" name="id_qrcode" value="{{ $qrcode->id }}">
+        <button type="submit">Paypal</button> 
+    </form>
 </div>
 
-<h1>Transacciones de este producto</h1>
-<div class="col-sm-12 table table-striped">
-    <table>
-        <thead class="thead-dark">
+<h1>TRANSACCIONES DE ESTE PRODUCTO</h1>
+
+<div class="col-sm-12">
+    <table class="table">
+        <thead class="table-dark">
             <tr>
-                <th>Transactions Id</th>
-                <th>Amount</th>
-                <th>Payment_method</th>
-                <th>Status</th>
-                <th>Usuario</th>
+                <th scope="col">Transactions Id</th>
+                <th scope="col">Amount</th>
+                <th scope="col">payment_method</th>
+                <th scope="col">status</th>
+                <th scope="col">usuario</th>
             </tr>
         </thead>
         <tbody>
             @php
-                $totalAmount = 0;
+                $totalAmount = 0; // Inicializamos la variable para almacenar el total
             @endphp
             @foreach ($qrcode->transactions as $transaction)
-                @php
-                    $totalAmount += $transaction->amount;
-                @endphp
                 <tr>
-                    <td>
-                        <a href="../transactions/{{ $transaction->user['id'] }}">{{ $transaction-> id }}</a>
-                    </td>
-                    <td>${{ $transaction->amount }}</td>
+                    <td><a href="/transactions/{{ $transaction->id }}">{{ $transaction->id }}</a></td>
+                    <td>{{ $transaction->amount }}</td>
                     <td>{{ $transaction->payment_method }}</td>
                     <td>{{ $transaction->status }}</td>
-                    <td>
-                        <a href="../users/{{ $transaction->user['id'] }}">{{ $transaction->user['name'] }}</a>
-                    </td>
+                    <td><a href="/users/{{ $transaction->user['id'] }}">{{ $transaction->user['name'] }}</a></td>
                 </tr>
+                @php
+                    $totalAmount += $transaction->amount; // Sumamos el monto de la transacción al total
+                @endphp
             @endforeach
+        </tbody>
+        <tfoot>
             <tr>
                 <td colspan="2"></td>
-                <td><h3>Total:</h3>
-                    <h4>${{ number_format($totalAmount, 2) }}</h4>
-                </td>
+                <td>Total: ${{ $totalAmount }}</td>
+                <td></td>
                 <td></td>
             </tr>
-        </tbody>
+        </tfoot>
     </table>
 </div>
-

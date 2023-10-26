@@ -10,7 +10,9 @@
             <tbody>
             @foreach($roles as $rol)
                 <tr>
-                    <td>{{ $rol->name }}</td>
+                    <td>
+                        <a href="{{ route('roles.show', [$rol->id]) }}"><button type="button" class="btn btn-outline-primary">{{ $rol->name }}</button></a>
+                    </td>
                     <td  style="width: 120px">
                         {!! Form::open(['route' => ['roles.destroy', $rol->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>
