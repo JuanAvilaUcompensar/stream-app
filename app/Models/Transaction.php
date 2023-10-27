@@ -108,7 +108,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
     public function product()
     {
-        return $this->BelongsTo(Qrcode::class, 'qrcode_id')->select('product_name', 'product_url_image_path');
+        return $this->BelongsTo(Qrcode::class);
     }
 
 }

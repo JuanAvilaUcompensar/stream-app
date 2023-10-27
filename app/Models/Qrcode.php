@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+ use Illuminate\Database\Eloquent\SoftDeletes;
+ use Illuminate\Database\Eloquent\Relations\HasMany;
+ use Illuminate\Database\Eloquent\Relations\BelongsTo;
+ 
 /**
  * @OA\Schema(
  *      schema="Qrcode",
@@ -33,6 +34,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *      ),
  *      @OA\Property(
  *          property="product_url",
+ *          description="",
+ *          readOnly=false,
+ *          nullable=true,
+ *          type="string",
+ *      ),
+ *      @OA\Property(
+ *          property="product_url_image_path",
  *          description="",
  *          readOnly=false,
  *          nullable=true,
@@ -83,13 +91,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          nullable=true,
  *          type="string",
  *          format="date-time"
- *      ),
- *      @OA\Property(
- *          property="product_url_image_path",
- *          description="",
- *          readOnly=false,
- *          nullable=true,
- *          type="string",
  *      )
  * )
  */class Qrcode extends Model
@@ -102,10 +103,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
         'company_name',
         'product_name',
         'product_url',
+        'product_url_image_path',
         'callback_url',
         'qrcode_path',
-        'amount',
-        'product_url_image_path'
+        'amount'
     ];
 
     protected $casts = [
@@ -113,10 +114,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
         'company_name' => 'string',
         'product_name' => 'string',
         'product_url' => 'string',
+        'product_url_image_path' => 'string',
         'callback_url' => 'string',
         'qrcode_path' => 'string',
-        'amount' => 'float',
-        'product_url_image_path' => 'string'
+        'amount' => 'float'
     ];
 
     public static array $rules = [
@@ -125,32 +126,23 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
         'company_name' => 'required|string|max:255',
         'product_name' => 'required|string|max:255',
         'product_url' => 'nullable|string|max:255',
+        'product_url_image_path' => 'nullable||mimes:jpeg,jpg,png,bmp,gif,svg||max:2048',
         'callback_url' => 'required|string|max:255',
         'qrcode_path' => 'nullable|string|max:255',
         'amount' => 'required|numeric',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
-        'deleted_at' => 'nullable',
-        'product_url_image_path' => 'nullable||mimes:jpeg,jpg,png,bmp,gif,svg||max:2048'
+        'deleted_at' => 'nullable'
     ];
-    
+
     public function transactions(): HasMany
     {
         return $this->hasMany(Transaction::class);
-    }
-
-    public function users(): HasMany
-    {
-        return $this->hasMany(User::class);
     }
     
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
-    public function searchQr()
-    {
-        echo "";
-        return $this->BelongsTo(Qrcode::class, 'qrcode_id')->select('amount');
-    }
+    
 }

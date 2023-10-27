@@ -18,8 +18,15 @@
             <tbody>
             @foreach($qrcodes as $qrcode)
                 <tr>
-                    <td> <a href="/users/{{$qrcode->user['id']}}"><button type="button" class="btn btn-outline-primary">{{$qrcode->user['name']}}</button></a></td>
-                    <td> <a href="{{$qrcode->website}}"><button type="button" class="btn btn-outline-primary">{{$qrcode->website}}</button></a></td>
+                    <td> 
+                        <a href="/users/{{$qrcode->user['id']}}">
+                            <button type="button" class="btn btn-outline-primary">
+                                {{$qrcode->user['name']}}
+                            </button>
+                        </a>
+                    </td>
+                    <td> 
+                        <a href="{{$qrcode->website}}"><button type="button" class="btn btn-outline-primary">{{$qrcode->website}}</button></a></td>
                     <td>{{ $qrcode->company_name }}</td>
                     <td>{{ $qrcode->product_name }}</td>
                     <td>{{ $qrcode->product_url }}</td>

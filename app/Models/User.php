@@ -2,16 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
 /**
  * @OA\Schema(
  *      schema="User",
- *      required={"name","email","password"},
+ *      required={"roles_id","name","email","password"},
  *      @OA\Property(
  *          property="name",
  *          description="",
@@ -63,14 +62,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *          nullable=true,
  *          type="string",
  *          format="date-time"
- *      ),
- *      @OA\Property(
- *          property="deleted_at",
- *          description="",
- *          readOnly=true,
- *          nullable=true,
- *          type="string",
- *          format="date-time"
  *      )
  * )
  */class User extends Model implements Authenticatable
@@ -102,68 +93,69 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
         'password' => 'required|string|max:255',
         'remember_token' => 'nullable|string|max:100',
         'created_at' => 'nullable',
-        'updated_at' => 'nullable',
-        'deleted_at' => 'nullable'
+        'updated_at' => 'nullable'
     ];
-    public function getAuthIdentifierName()
-    {
-        return 'id';
-    }
-    public function getAuthIdentifier()
-    {
-        return $this->getKey();
-    }
-    public function getAuthPassword()
-    {
-        return $this->password;
-    } 
-    public function getRememberToken()
-    {
-        return $this->remember_token;
-    }
-    public function getRolesId(){
-        return 'roles_id';
-    }
-    public function setRolesId($value){
-        $this->roles_id = $value;
-    }
-    public function setRememberToken($value)
-    {
-        $this->remember_token = $value;
-    }
-    public function getRememberTokenName()
-    {
-        return 'remember_token';
-    }
-    public function setPasswordAttribute($value)
-    {
-        if(Hash::needsRehash($value))
 
-        $password = Hash::make($value);
+    public function getAuthIdentifierName()
+     {
+         return 'id'; // Puedes cambiar 'id' al nombre de la columna que se utiliza como identificador en tu tabla de usuarios.
+     }
+
+     public function getRolesId()
+     {
+         return 'roles_id'; // 
+     }
+ 
+     public function getAuthIdentifier()
+     {
+         return $this->getKey();
+     }
+ 
+     public function getAuthPassword()
+     {
+         return $this->password;
+     }
+ 
+     public function getRememberToken()
+     {
+         return $this->remember_token;
+     }
+     
+     public function setRolesId($value)
+     {
+         $this->roles_id = $value;
+     }
+
+     public function setRememberToken($value)
+     {
+         $this->remember_token = $value;
+     }
+ 
+     public function getRememberTokenName()
+     {
+         return 'remember_token';
+     }
+     public function setPasswordAttribute($value)
+     {
+        if(Hash::needsRehash($value)) 
+            $password = Hash::make($value);
 
         $this->attributes['password'] = $value;
-    }
-
+     }
+ 
     /**
-     * Get the transactions for user.
+     * Get the transactions for one qrcode.
      */
     public function transactions(): HasMany
     {
         return $this->hasMany(Transaction::class);
     }
-    /**
-     * Get the roles for roles.
-     */
-    public function roles(): HasMany
-    {
-        return $this->hasMany(Roles::class);
-    }
 
-    public function role_name()
+    public function roles(): BelongsTo
     {
-        return $this->hasMany(Roles::class, 'id', 'roles_id')->select('name');
+        return $this->belongsTo(Roles::class);
     }
-
+    
     public function qrcodes(): HasMany
     {
         return $this->hasMany(Qrcode::class);

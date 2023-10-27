@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 26-10-2023 a las 06:17:16
+-- Tiempo de generación: 27-10-2023 a las 04:30:09
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -152,15 +152,7 @@ CREATE TABLE `qrcodes` (
 --
 
 INSERT INTO `qrcodes` (`id`, `user_id`, `website`, `company_name`, `product_name`, `product_url`, `callback_url`, `qrcode_path`, `amount`, `created_at`, `updated_at`, `deleted_at`, `product_url_image_path`) VALUES
-(1, 2, 'cfvga', 'dfgds', 'sdfg', 'sfdg', 'sdfgs', 'sdfg', -3.0000, '2023-09-07 04:50:50', '2023-09-07 04:50:56', '2023-09-07 04:50:56', NULL),
-(2, 2, 'ASDFA', 'ADSFA', 'ASDF', 'SDF', 'dfSAD', NULL, 5.0000, '2023-09-07 05:05:30', '2023-09-07 05:33:42', '2023-09-07 05:33:42', NULL),
-(3, 2, 'sxfs', 'sdf', 'sda', 'asdf', 'asdf', 'generated_qrcodes/3.png', 5.0000, '2023-09-07 05:23:49', '2023-09-14 05:01:29', '2023-09-14 05:01:29', NULL),
-(4, 2, 'asdfg', 'asdfa', 'aghajs', 'aadfaf', 'adsfa', 'generated_qrcodes/4.png', 2.0000, '2023-09-07 05:33:54', '2023-09-14 05:01:32', '2023-09-14 05:01:32', NULL),
-(5, 2, 'asdfg', 'asdfa', 'aghajs', 'aadfaf', 'adsfa', 'generated_qrcodes/5.png', 2.0000, '2023-09-07 05:34:42', '2023-09-07 05:38:57', '2023-09-07 05:38:57', NULL),
-(6, 2, 'asdfasdf', 'asdfsa', 'asdfas', 'asdfas', 'asdfas', 'generated_qrcodes/6.png', 1.0000, '2023-09-08 05:15:03', '2023-09-14 05:01:36', '2023-09-14 05:01:36', NULL),
-(7, 2, 'asdfasdf', 'adfasd', 'dsfaqer', 'asdfadwf', 'asdf', 'generated_qrcodes/7.png', 4.0000, '2023-09-14 04:59:02', '2023-10-26 06:43:41', '2023-10-26 06:43:41', 'selected_product_Images/7_65024cc64c783_584df3ad6a5ae41a83ddee08.png'),
-(8, 2, 'astq3tqew', 'ertqw', 'ewrq', 'ewrqaw', 'adsfasdf', 'generated_qrcodes/8.png', 2.0000, '2023-09-14 05:11:45', '2023-10-26 06:43:45', '2023-10-26 06:43:45', 'selected_product_Images/8_65024fc1d642d_Stitch-png-sin-Fondo.png'),
-(9, 3, 'sadfasdfa', 'asdfasdf', 'wrwqer', 'etwrtw', 'qeqrwer', 'generated_qrcodes/9.png', 3.0000, '2023-10-26 07:11:47', '2023-10-26 07:11:48', NULL, 'selected_product_Images/9_6539cae367548_btnMenu.png');
+(10, 6, 'https://www.youtube.com/watch?v=PQ-7BNDKcFo&list=PLWtYZ2ejMVJkjOuTCzIk61j7XKfpIR74K&index=22', 'et', 'sdf', 'https://tcsglobal.udemy.com/course/ingles-basico-15-minutos-diarios/learn/lecture/24756616#overview', 'qeqrwer', 'generated_qrcodes/10.png', 2.0000, '2023-10-27 07:28:22', '2023-10-27 07:28:23', NULL, 'selected_product_Images/10_653b2046db4be_fond.png');
 
 -- --------------------------------------------------------
 
@@ -181,9 +173,9 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(0, 'Webmaster', '2023-09-28 08:45:24', '2023-09-28 08:45:24', NULL),
-(1, 'Administrador', '2023-10-26 08:15:45', '2023-10-26 08:15:45', NULL),
-(2, 'Cliente', '2023-09-28 08:45:42', '2023-09-28 08:45:42', NULL);
+(1, 'Webmaster', '2023-09-28 08:45:24', '2023-09-28 08:45:24', NULL),
+(2, 'Administrador', '2023-10-26 08:15:45', '2023-10-26 08:15:45', NULL),
+(3, 'Cliente', '2023-09-28 08:45:42', '2023-09-28 08:45:42', NULL);
 
 -- --------------------------------------------------------
 
@@ -204,13 +196,6 @@ CREATE TABLE `transactions` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `transactions`
---
-
-INSERT INTO `transactions` (`id`, `user_id`, `qrcode_owner_id`, `qrcode_id`, `payment_method`, `message`, `amount`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(4, 3, 3, 3, 'paypal', NULL, 2.0000, 'enkhu', '2023-10-26 07:29:36', '2023-10-26 07:29:36', NULL);
 
 -- --------------------------------------------------------
 
@@ -236,7 +221,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `roles_id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(3, 1, 'Juan Manuel Avila Perez', 'jmanuelavila@ucompensar.edu.co', NULL, '$2y$10$MxLRzuL0HeXp7p.gXe0qtuaGwyamn.BKNSPdAqPKSGph92LJYAduW', NULL, '2023-10-26 06:41:33', '2023-10-26 06:41:33', NULL);
+(1, 3, 'Juan Avila', 'halcon18d@gmail.com', NULL, '$2y$10$C9JraZ5DU.RSD9/Lvm38tuGGuaFHy4XhpqoZt4NHskTZlajhT2aVG', NULL, '2023-10-27 06:51:16', '2023-10-27 06:51:16', NULL),
+(6, 2, 'Juan Manuel Avila Perez', 'jmanuelavila@ucompensar.edu.co', NULL, '$2y$10$GaSlpmLCWCELPNhDFSo.LO.7ljnLDjVRhemGLRCsmnWh5t1qOxJti', NULL, '2023-10-27 07:21:50', '2023-10-27 07:21:50', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -338,7 +324,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT de la tabla `qrcodes`
 --
 ALTER TABLE `qrcodes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -356,7 +342,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

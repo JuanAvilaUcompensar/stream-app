@@ -1,7 +1,7 @@
 <!-- Name Field -->
 <div class="col-sm-12" style="margin-bottom: 1%;">
     <h6><strong>Rol de este usuario:</strong></h6>
-    <a href="/roles/{{$user->roles_id}}"><button type="button" class="btn btn-outline-primary">{{ $user->role_name[0]['name'] }}</button></a>
+    <a href="/roles/{{$user->roles_id}}"><button type="button" class="btn btn-outline-primary">{{ $user->roles['name'] }}</button></a>
 </div>
 
 <!-- Name Field -->
@@ -39,7 +39,7 @@
                     <td>{{ $transaction->id }}</td>
                     <td>
                         <a href="/qrcodes/{{$transaction->qrcode_id}}">
-                            {{ $transaction->product['product_name']}}
+                            {{ $transaction->qrcode['product_name']}}
                         </a>
                     <img src="../{{ $transaction->product['product_url_image_path']}}" width="100px" />
                     </td>
