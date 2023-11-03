@@ -13,13 +13,11 @@ class ApiController extends Controller
     //
     public function productos(Request $request)
     {
-        if($request->has('id'))
-        {
-            $id = $request-input('id');
-            $productos = Qrcodes::where('id', $id) ->get();
+        if($request->has('id')){
+            $id = $request->input('id');
+            $productos = Qrcodes::where('id', $id)->get();
         }
-        else
-        {
+        else{
             $productos = Qrcode::all();
         }
 

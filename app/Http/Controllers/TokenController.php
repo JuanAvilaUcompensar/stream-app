@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Models\User;
+use App\Models\User;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Sanctum;
@@ -24,6 +24,6 @@ class TokenController extends Controller
         $user->save();
 
 
-        return redirect()-route('user,show', $user->id)->with('sucess', 'Token generado y guardado con exito.');
+        return redirect()->route('users.show', $user->id)->with('success', 'Token generado y guardado con exito.');
     }
 }
