@@ -16,6 +16,20 @@
     <p>{{ $user->email }}</p>
 </div>
 
+<!--Token Actual-->
+<div class="col-sm-12">
+    {!! Form::label('Token','Token') !!}
+    <p>{{ $user->remember_token }}</p>
+</div>
+
+<!--Solicitar Token-->
+<div class="col-sm-12">
+    <form method="Post" action="{{route ('generate-token', $user)}}">
+        @csrf
+        @method('Post')
+        <button type="submit" class="btn btn-primary">Generar Token</button>        
+    </form>
+</div>
 
 <h1>TRANSACCIONES DE ESTE USUARIO</h1>
 

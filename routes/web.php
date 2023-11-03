@@ -29,3 +29,5 @@ Route::resource('users', App\Http\Controllers\UserController::class);
 Route::post('pay', [App\Http\Controllers\PaymentController::class, 'pay'])->name('payment'); 
 Route::get('success', [App\Http\Controllers\PaymentController::class, 'success']); 
 Route::get('error', [App\Http\Controllers\PaymentController::class, 'error']);
+
+Route::post('generateToken/{user}', [App\Http\Controllers\TokenController::class, 'generateToken'])->name('generate-token');
