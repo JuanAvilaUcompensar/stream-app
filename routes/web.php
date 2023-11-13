@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ApiController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,3 +33,7 @@ Route::get('success', [App\Http\Controllers\PaymentController::class, 'success']
 Route::get('error', [App\Http\Controllers\PaymentController::class, 'error']);
 
 Route::post('generateToken/{user}', [App\Http\Controllers\TokenController::class, 'generateToken'])->name('generate-token');
+
+Route::middleware('auth:sanctum')->get('/user', function(Request $request) {
+    return $request->user();
+});

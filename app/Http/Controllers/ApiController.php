@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Hash;
 class ApiController extends Controller
 {
     //
+    public function __construc()
+    {
+        $this->middleware('auth:sanctum');
+    }
     public function productos(Request $request)
     {
         if($request->has('id')){
